@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/login', loginData);
+      const res = await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/auth/login', loginData);
       setToken(res.data.token);
       setView('dashboard');
     } catch (err) {
@@ -27,7 +27,7 @@ export default function AdminDashboard() {
     const form = new FormData();
     Object.entries(formData).forEach(([key, val]) => form.append(key, val));
     try {
-      await axios.post('/api/portfolio', form, {
+      await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/portfolio', form, {
         headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
       });
       alert('Portfolio item added');
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     const form = new FormData();
     Object.entries(blogData).forEach(([key, val]) => form.append(key, val));
     try {
-      await axios.post('/api/blogs', form, {
+      await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/blogs', form, {
         headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
       });
       alert('Blog post added');
@@ -53,17 +53,17 @@ export default function AdminDashboard() {
   };
 
   const loadPortfolio = async () => {
-    const res = await axios.get('/api/portfolio');
+    const res = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/portfolio');
     setPortfolio(res.data);
   };
 
   const loadBlogs = async () => {
-    const res = await axios.get('/api/blogs');
+    const res = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/blogs');
     setBlogs(res.data);
   };
 
   const loadContacts = async () => {
-    const res = await axios.get('/api/contact-messages');
+    const res = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/contact-messages');
     setContacts(res.data);
   };
 
